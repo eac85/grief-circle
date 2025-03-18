@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consent Form</title>
+    <!-- Include Lucide Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/lucide-icons@latest/dist/lucide.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @font-face {
+            font-family: 'LucideIcons';
+            src: url(https://unpkg.com/lucide-static@latest/font/Lucide.ttf) format('truetype');
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E8E0D2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .input-group i {
+            margin-right: 10px;
+            color: #555;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+        label {
+            font-size: 14px;
+            color: #555;
+        }
+       
+        .checkbox-group {
+            padding-bottom: 20px;
+            display: inline-flex; /* Keeps checkbox and label in a row */
+            align-items: center; /* Vertically align checkbox and label */
+            white-space: nowrap; /* Prevents the label from wrapping onto multiple lines */
+        }
+
+        .checkbox-group input {
+            margin: 0;
+            padding: 0;
+            vertical-align: middle;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            padding-left: 5px;
+            white-space: nowrap; /* Prevents text from wrapping */
+        }
+       
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #29292a;
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #929292;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="content">
+        <h2>hi, welcome! <i data-lucide="sparkle" style="font-size: 20px; padding-right:4px;"></i>
+        </h2>            
+
+        <p>thank you for being part of this project. i’m really grateful for your willingness to share your story. please take a moment to fill out this form and share your consent.</p>
+
+        <form id="consentForm">
+            <div class="input-group">
+                <!-- Lucide User Icon -->
+                <input type="text" id="name" name="name" placeholder="your name" required>
+            </div>
+
+            <div class="input-group">
+                <!-- Lucide Envelope Icon -->
+                <input type="email" id="email" name="email" placeholder="your email" required>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="anonymous" name="anonymous" >
+                <label for="anonymous">i'd like to remain anonymous</label>
+            </div>
+
+
+            <p style="font-size: 12px; color: #555;">
+                by submitting this form, you're giving me permission to share your photo and your thoughts as part of this project. it's totally up to you, and I appreciate it so much. 
+            </p>
+
+           
+           
+            <div class="checkbox-group">
+                <input type="checkbox" id="consent" name="consent" required>
+                <label for="consent">yes, i agree to these terms!</label>
+            </div>
+            <br>
+            
+
+            <button type="submit">Submit </i></button>
+        </form>
+    </div>
+
+    <script>
+            lucide.createIcons();
+
+        document.getElementById("consentForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            console.log("hfsjfojds")
+            const formData = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                anonymous: document.getElementById("anonymous").checked,
+                consent: document.getElementById("consent").checked
+            };
+
+            console.log(formData);
+
+            try {
+                const response = await fetch("http://localhost:8080/api/form/consent", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) throw new Error("Failed to submit");
+
+                // Replace form with "thank you"
+                document.getElementById("content").innerHTML = `<h2>thank you so much, it means the world to me  <i data-lucide="earth" style="font-size: 20px; padding-right:4px;"></i></h2>`;
+            } catch (error) {
+                alert("Submission failed. Please try again.");
+                console.error("Error:", error);
+            }
+        });
+    </script>
+
+</body>
+</html>
