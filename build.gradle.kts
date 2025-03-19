@@ -1,5 +1,6 @@
 plugins {
 	kotlin("jvm") version "1.9.25"
+	id("java")
 	kotlin("plugin.spring") version "1.9.25"
 	id("org.springframework.boot") version "3.4.3"
 	id("io.spring.dependency-management") version "1.1.7"
@@ -8,6 +9,14 @@ plugins {
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
+
+tasks.jar {
+    archiveBaseName.set("your-app")  // Set the JAR file name (without the version)
+    archiveVersion.set("1.0.0")      // Set the JAR version
+    manifest {
+        attributes["Main-Class"] = "com.example.demo.DemoApplicationKt" // Set the entry point for your app
+    }
+}
 
 java {
 	toolchain {
@@ -26,6 +35,8 @@ repositories {
 }
 
 dependencies {
+	implementation("org.jetbrains.kotlin:kotlin-stdlib")
+    implementation("org.springframework.boot:spring-boot-starter")
 	implementation("io.ktor:ktor-client-core:2.3.0")
     implementation("io.ktor:ktor-client-cio:2.3.0")  // Use CIO client
     implementation("io.ktor:ktor-client-content-negotiation:2.3.0")
