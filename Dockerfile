@@ -9,17 +9,20 @@ COPY gradle /app/gradle
 COPY gradlew /app/
 COPY build.gradle.kts /app/
 
-# Copy the source code to the container
+# Copy source code
 COPY src /app/src
 
-# Make gradlew executable (if it's not already executable)
+# Make gradlew executable (if not already executable)
 RUN chmod +x gradlew
 
-# Install dependencies and build the project with Gradle using the wrapper
+# Build the project with Gradle using the wrapper
 RUN ./gradlew build
 
-# Expose the application port (optional, if it's a web app)
+# Copy the JAR file into the container
+COPY build/libs/demo-0.0.1-SNAPSHOT.jar /app/demo-0.0.1-SNAPSHOT.jar
+
+# Expose the application port (if it's a web app)
 EXPOSE 8080
 
 # Set the entry point to run the app
-CMD ["java", "-jar", "build/libs/demo-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/app/demo-0.0.1-SNAPSHOT.jar"]
