@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    SUPABASE_URL: ${SUPABASE_URL}
+    SUPABASE_KEY: ${SUPABASE_KEY}
+    SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+  jpa:
+    hibernate:
+      ddl-auto: update

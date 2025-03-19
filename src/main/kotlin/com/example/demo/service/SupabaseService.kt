@@ -1,6 +1,5 @@
 package com.example.demo.service
 
-import io.github.cdimascio.dotenv.dotenv
 import io.ktor.client.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
@@ -30,13 +29,15 @@ class SupabaseService {
     data class ConsentFormData(val name: String, val email: String, val anonymous: Boolean)
 
     suspend fun submitConsent(name: String, email: String, anonymous: Boolean): String {
-        val dotenv = dotenv()
-
-        val SUPABASE_URL =
+        /*val SUPABASE_URL =
                 dotenv["SUPABASE_URL"] ?: throw IllegalStateException("SUPABASE_URL not set!")
         val SUPABASE_KEY =
                 dotenv["SUPABASE_KEY"] ?: throw IllegalStateException("SUPABASE_KEY not set!")
-        val SENDGRID_API_KEY = dotenv["SENDGRID_API_KEY"]
+        val SENDGRID_API_KEY = dotenv["SENDGRID_API_KEY"]*/
+
+        val SUPABASE_URL = System.getenv("SUPABASE_URL")
+        val SUPABASE_KEY = System.getenv("SUPABASE_KEY")
+        val SENDGRID_API_KEY = System.getenv("SENDGRID_API_KEY")
 
         // Create a ConsentFormData object
         val emailBody =
@@ -66,7 +67,9 @@ class SupabaseService {
         println("Sending consent data: $jsonData")
 
         // Send data using Ktor client
+        println(SUPABASE_URL)
         println(SUPABASE_KEY)
+        println(SENDGRID_API_KEY)
         val response =
                 client.post("$SUPABASE_URL/rest/v1/consent") {
                     headers {
