@@ -28,9 +28,9 @@ class SendGridService(private val apiKey: String) {
 
             // Check if the response is a success (200 or 202 status codes)
             return if (response.statusCode in 200..299) {
-                "Form submitted successfully. Status Code: ${response.statusCode}"
+                "Email sent successfully. Status Code: ${response.statusCode}"
             } else {
-                "Form submission failed with status ${response.statusCode}. Response: ${response.body}"
+                "Email failed with status ${response.statusCode}. Response: ${response.body}"
             }
         } catch (e: Exception) {
             // Catch any exceptions during the request

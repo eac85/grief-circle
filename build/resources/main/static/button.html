@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About This Project</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E8E0D2;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container */
+        .container {
+            background: rgba(255, 255, 255, 0.3); /* Transparent background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(8px); /* Glassmorphism effect */
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        p {
+            font-size: 16px;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        /* Transparent 3D Button */
+        .action-btn {
+            margin-top: 30px;
+        }
+
+        .action-btn a {
+            display: inline-block;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.2); /* Transparent */
+            color: #29292a;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            border: 2px solid #29292a;
+            position: relative;
+            margin: 10px;
+            text-align: center;
+        }
+
+        /* Pressed effect */
+        .action-btn a:active {
+            transform: translateY(4px);
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap');
+
+body {
+  margin: auto;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #f5f1eb;
+}
+
+.custom-btn {
+  padding: 20px 44px;
+  background-color: transparent;
+  border: 1px solid #141211;
+  border-radius: 50px;
+  font-family: "Ubuntu Sans Mono", monospace;
+  color: #141211;
+  font-size: 20px;
+  text-decoration: none;
+  box-shadow: 0 0 0;
+  transition: all 200ms;
+}
+
+.custom-btn:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 12px 1px #141211;
+}
+
+.custom-btn:active {
+  transform: translateY(10px);
+  box-shadow: 0 0 0;
+}
+
+h1, .text {
+  font-family: "Nixie One", system-ui;
+  font-size: 12px;
+}
+
+
+.text {
+  color: #141211;
+  font-style: normal;
+}
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>about this project</h1>
+        
+        <p>this project started when my dad died, and i inherited his film camera.</p>
+        
+        <p>i have been so lonely in my grief that i felt led to ask strangers about theirs.  
+        i take their portrait and listen to their story. this is a space for those conversations  
+        to live—so none of us feel so alone.</p>
+
+        <p>thank you for being here.</p>
+
+        <!-- Support Buttons -->
+        <div class="action-btn">
+            <a href="href="https://venmo.com/u/samuelbernhardt?txn=pay&amount=5&note=Buy%20a%20Griever%20Coffee" class="custom-btn" role="link">Support the project</a>
+            <a href="https://venmo.com/u/samuelbernhardt?txn=pay&amount=5&note=Buy%20a%20Griever%20Coffee" class="custom-btn" role="link">Buy a Griever Coffee</a>
+            <a href="https://venmo.com/u/samuelbernhardt?txn=pay&amount=7&note=Buy%20a%20Roll%20of%20Film" class="custom-btn" role="link">Buy a Roll of Film</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -65,11 +65,7 @@ class SupabaseService {
 
         // Log the data (for debugging purposes)
         println("Sending consent data: $jsonData")
-
-        // Send data using Ktor client
-        println(SUPABASE_URL)
-        println(SUPABASE_KEY)
-        println(SENDGRID_API_KEY)
+        
         val response =
                 client.post("$SUPABASE_URL/rest/v1/consent") {
                     headers {
