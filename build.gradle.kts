@@ -35,24 +35,29 @@ repositories {
 }
 
 dependencies {
-	implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation("org.springframework.boot:spring-boot-starter")
-	implementation("io.ktor:ktor-client-core:2.3.0")
-    implementation("io.ktor:ktor-client-cio:2.3.0")  // Use CIO client
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+    implementation("org.springframework.boot:spring-boot-starter:2.7.10") // Specify version
+    implementation("io.ktor:ktor-client-core:2.3.0")
+    implementation("io.ktor:ktor-client-cio:2.3.0")
     implementation("io.ktor:ktor-client-content-negotiation:2.3.0")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.0")
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	compileOnly("org.projectlombok:lombok")
-	annotationProcessor("org.projectlombok:lombok")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-	implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4") // or latest version
-	implementation("com.sendgrid:sendgrid-java:4.7.0")
-	implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("com.sendgrid:sendgrid-java:4.7.0")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+	// For Kotlin coroutines
+	implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+	implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+	implementation ("org.springframework.boot:spring-boot-starter-webflux")
+	implementation("io.ktor:ktor-client-logging:2.3.4")
 }
+
 
 kotlin {
 	compilerOptions {

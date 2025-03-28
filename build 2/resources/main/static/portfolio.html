@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editorial Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .gallery-container {
+            width: 80%;
+            background: white;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 20px;
+            gap: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .text-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .text-section h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .image-section img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .thumbnail-strip {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-top: 10px;
+            grid-column: span 2;
+        }
+        .thumbnail-strip img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .thumbnail-strip img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const featuredImage = document.querySelector(".image-section img");
+            const thumbnailStrip = document.querySelector(".thumbnail-strip");
+
+            try {
+                const response = await fetch("/api/download/file");
+                const data = await response.json();
+                if(data) {
+                    console.log(data);
+                }
+                if (data.featured && featuredImage) {
+                    featuredImage.src = data.featured;
+                }
+
+                if (data.thumbnails && Array.isArray(data.thumbnails)) {
+                    thumbnailStrip.innerHTML = ""; // Clear existing thumbnails
+                    data.thumbnails.forEach((thumbnailUrl) => {
+                        const img = document.createElement("img");
+                        img.src = thumbnailUrl;
+                        img.alt = "Thumbnail";
+                        thumbnailStrip.appendChild(img);
+                    });
+                }
+            } catch (error) {
+                console.error("Error fetching image data:", error);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="gallery-container">
+        <div class="text-section">
+            <h1>Editorial by Your Name</h1>
+            <p>Description or subtitle here.</p>
+        </div>
+        <div class="image-section">
+            <img src="your-featured-image.jpg" alt="Featured">
+        </div>
+        <div class="thumbnail-strip">
+            <img src="thumb1.jpg" alt="Thumbnail 1">
+            <img src="thumb2.jpg" alt="Thumbnail 2">
+            <img src="thumb3.jpg" alt="Thumbnail 3">
+            <img src="thumb4.jpg" alt="Thumbnail 4">
+            <img src="thumb2.jpg" alt="Thumbnail 2">
+            <img src="thumb3.jpg" alt="Thumbnail 3">
+            <img src="thumb4.jpg" alt="Thumbnail 4">
+            <img src="thumb2.jpg" alt="Thumbnail 2">
+            <img src="thumb3.jpg" alt="Thumbnail 3">
+            <img src="thumb4.jpg" alt="Thumbnail 4">
+        </div>
+    </div>
+</body>
+</html>

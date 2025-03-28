@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload to Supabase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px;
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: grey;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload an Image</h2>
+    <input type="file" id="fileInput">
+    <button onclick="uploadImage()">Upload</button>
+    <p id="status"></p>
+
+    <script>
+        async function uploadImage() {
+            const fileInput = document.getElementById("fileInput");
+            if (!fileInput.files.length) {
+                alert("Please select a file.");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+
+            document.getElementById("status").innerText = "Uploading...";
+
+            try {
+                const response = await fetch("/api/upload/file", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    document.getElementById("status").innerText = "Upload successful!";
+                } else {
+                    document.getElementById("status").innerText = "Error: " + result.message;
+                }
+            } catch (error) {
+                document.getElementById("status").innerText = "Upload failed.";
+            }
+        }
+    </script>
+</body>
+</html>

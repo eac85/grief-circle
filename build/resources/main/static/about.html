@@ -47,7 +47,10 @@
         .action-btn {
             margin-top: 40px;
             margin-bottom: 40px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Add spacing between buttons */
+            flex-wrap: wrap; /* Ensure buttons wrap if needed */
         }
 
         .action-btn a {
@@ -56,7 +59,6 @@
             text-decoration: none;
             border-radius: 20px;
             font-size: 10px;
-            margin-bottom: 15px;
             transition: background 0.3s;
         }
 
@@ -88,9 +90,7 @@
 <body>
 
     <div class="container">
-        <h1>about this project</h1>
-
-        <p>this project started when my dad passed away, and i inherited his film camera.</p>
+        <p>this <a href="/portfolio.html"class="custom-btn" style="padding: 5px 15px; font-size: 13px; border-radius: 10px;">project</a> started when my dad passed away, and i inherited his film camera.</p>
 
         <p>i have been quite lonely in my grief, so i felt led to ask strangers about theirs.
             i take their portrait and listen to their story. this is a space for those conversations

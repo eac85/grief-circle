@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editorial Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #E8E0D2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .gallery-container {
+            width: 80%;
+            background: #faf8f5;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 20px;
+            gap: 20px;
+            height: 90vh;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .text-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .text-section h1 {
+            font-size: .75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .image-section img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .thumbnail-strip {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-top: 10px;
+            grid-column: span 2;
+        }
+        .thumbnail-strip img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .thumbnail-strip img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const featuredImage = document.querySelector(".image-section img");
+            const thumbnailStrip = document.querySelector(".thumbnail-strip");
+
+            try {
+                const response = await fetch("/api/download/file");
+                const data = await response.json();
+                if(data) {
+                    console.log(data);
+                    featuredImage.src = data[0];
+                    data.forEach((item) => {
+                        const img = document.createElement("img");
+                        img.src = item;
+                        img.alt = "Thumbnail";
+                        img.addEventListener("click", () => {
+                            featuredImage.src = item; // Update featured image on click
+                        });
+                        thumbnailStrip.appendChild(img);
+                    });
+                }
+                if (data.featured && featuredImage) {
+                    featuredImage.src = data.featured;
+                }
+
+              
+            } catch (error) {
+                console.error("Error fetching image data:", error);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="gallery-container" style="display: flex; flex-direction: column; align-items: center; height: auto;">
+        <div class="text-section" style="width: 100%; text-align: center;">
+            <h1>Grief Circle</h1>
+        </div>
+        <div class="image-section" style="width: 100%; text-align: center;">
+            <img src="your-featured-image.jpg" alt="Featured" style="max-width: 100%; height: auto;max-width: 50vw;max-height: 50vh; min-width: 340px;">
+        </div>
+        <div class="thumbnail-strip" style="width: 100%; display: flex; justify-content: center;">            
+        </div>
+    </div>
+</body>
+</html>
